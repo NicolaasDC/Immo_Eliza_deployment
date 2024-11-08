@@ -30,7 +30,7 @@ def calculate_price(zip_code, construction_year, number_rooms, living_area, kitc
 
 st.title('🧱House price prediction🧱')
 
-st.info('This is an app to calculate the price of a house using a machine learning model')
+st.info('This is an app to calculate the price of a house or apartment using a machine learning model')
 
 st.write('You want to know the value of a house?')
 try:
@@ -82,10 +82,11 @@ else:
 if st.button("Click to calculate price"):
 # Call the function when the button is clicked
     price = calculate_price(zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc)
-    st.info("House with the parameters:")
     if type_house_enc == 1:
+        st.info("House with the parameters:")
         st.write("Type: house")
     else:
+        st.info("Apartment with the parameters:")
         st.write("Type: apartment")
     st.write("Zip code: ", zip_code)
     st.write("construction year: ", construction_year)
