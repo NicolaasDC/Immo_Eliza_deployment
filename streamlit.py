@@ -38,15 +38,15 @@ try:
 except ValueError as ve:
     st.error(f"Please enter a valid numeric value: {ve}")
 try:
-    construction_year = int(st.text_input("What is the construction year?"value=0))
+    construction_year = int(st.text_input("What is the construction year?", value=0))
 except ValueError as ve:
     st.error(f"Please enter a valid numeric value: {ve}")
 try:
-    number_rooms = int(st.text_input("What is the number of rooms?"value=0))
+    number_rooms = int(st.text_input("What is the number of rooms?", value=0))
 except ValueError as ve:
     st.error(f"Please enter a valid numeric value: {ve}")
 try:
-    living_area = float(st.text_input("What is the living area? (m²)"value=0))
+    living_area = float(st.text_input("What is the living area? (m²)", value=0))
 except ValueError as ve:
     st.error(f"Please enter a valid numeric value: {ve}")
     
