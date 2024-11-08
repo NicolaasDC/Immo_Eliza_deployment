@@ -60,7 +60,7 @@ try:
     state_building = st.selectbox("What is the state of the building?", ('To restore', 'To renovate', 'To be done up', 'Good', 'Just renovated', 'As new'), index=None, placeholder="Select state of the building")
     state_encoded = {'To restore': 0, 'To renovate': 1, 'To be done up': 2, 'Good': 3, 'Just renovated': 4, 'As new': 5}
 
-    state_building_enc = state_encoded[state_building]
+    state_building_enc = state_encoded.get(state_building, 0)
 
 
     type_house = st.selectbox("Is it a house or an apartement?", ('House', 'Apartment'), index=None, placeholder="Select house or apartment")
