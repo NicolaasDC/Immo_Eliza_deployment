@@ -82,7 +82,7 @@ else:
 if st.button("Click to calculate price"):
 # Call the function when the button is clicked
     price = calculate_price(zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc)
-    st.write("House with the parameters:")
+    st.info("House with the parameters:")
     if type_house_enc == 1:
         st.write("Type: house")
     else:
