@@ -23,7 +23,6 @@ def calculate_price(zip_code, construction_year, number_rooms, living_area, kitc
     new_house = np.array([zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc]).reshape(1, -1)  #['Postal code', 'Construction year', 'Number of rooms', 'Living area','kitchen', 'Primary energy consumption', 'Double glazing','State_encoded', 'Type of property_house']
     new_data_scaled = scaler.transform(new_house)
 
-
     # predict the price of the new house
     predicted_price = model.predict(new_data_scaled)
     return predicted_price[0]
@@ -33,6 +32,12 @@ st.title('🧱House price prediction🧱')
 st.info('This is an app to calculate the price of a house or apartment using a machine learning model')
 
 st.write('You want to know the value of a house?')
+
+type_house = st.selectbox("Is it a house or an apartement?", ('House', 'Apartment'), index=None, placeholder="Select house or apartment")
+if type_house == 'House':
+    type_house_enc = 1
+else:
+    type_house_enc = 0
 try:
     zip_code = int(st.text_input("What is the zip code?", value=0))
 except ValueError as ve:
@@ -71,12 +76,6 @@ state_building = st.selectbox("What is the state of the building?", ('To restore
 state_encoded = {'To restore': 0, 'To renovate': 1, 'To be done up': 2, 'Good': 3, 'Just renovated': 4, 'As new': 5}
 
 state_building_enc = state_encoded.get(state_building, 0)
-
-type_house = st.selectbox("Is it a house or an apartement?", ('House', 'Apartment'), index=None, placeholder="Select house or apartment")
-if type_house == 'House':
-    type_house_enc = 1
-else:
-    type_house_enc = 0
     
 # Place the button in the Streamlit app
 if st.button("Click to calculate price"):
@@ -103,7 +102,7 @@ if st.button("Click to calculate price"):
         st.write("Double glazing: not present")
     st.write("State of the building: ", state_building)
     
-    st.write("Your predicted price: €", round(price, 0))
+    st.write("Your predicted price: €", round(price))
         
 
     
