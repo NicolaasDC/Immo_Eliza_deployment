@@ -36,15 +36,15 @@ st.write('You want to know the value of a house?')
 try:
     zip_code = int(st.text_input("What is the zip code?", value=0))
 except ValueError as ve:
-    st.error(f"Please enter a valid numeric value: {ve}")
+    st.error(f"Please enter a valid numeric value")
 try:
     construction_year = int(st.text_input("What is the construction year?", value=0))
 except ValueError as ve:
-    st.error(f"Please enter a valid numeric value: {ve}")
+    st.error(f"Please enter a valid numeric value")
 try:
     number_rooms = int(st.text_input("What is the number of rooms?", value=0))
 except ValueError as ve:
-    st.error(f"Please enter a valid numeric value: {ve}")
+    st.error(f"Please enter a valid numeric value{ve}")
 try:
     living_area = float(st.text_input("What is the living area? (m²)", value=0))
 except ValueError as ve:
@@ -59,7 +59,7 @@ else:
 try:
     primary_energy_consumption = float(st.text_input("What is the primary energy consumption? (kWh/m²)", value=0))
 except ValueError as ve:
-    st.error(f"Please enter a valid numeric value: {ve}")
+    st.error(f"Please enter a valid numeric value")
     
 double_glazing = st.selectbox("Does the house have double glazing?",('Yes', 'No'), index=None, placeholder="Select double glazing")
 if double_glazing ==  'Yes':
@@ -81,8 +81,28 @@ else:
 # Place the button in the Streamlit app
 if st.button("Click to calculate price"):
 # Call the function when the button is clicked
-    price = calculate_price(zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc)   
-    st.write("Your predicted price: €", round(price, 2))
+    price = calculate_price(zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc)
+    st.write("House with the parameters:")
+    if type_house_enc == 1:
+        st.write("Type: house")
+    else:
+        st.write("Type: apartment")
+    st.write("Zip code: ", zip_code)
+    st.write("construction year: ", construction_year)
+    st.write("Number of rooms: ", number_rooms)
+    st.write("living_area: ", living_area, " m²")
+    if kitchen_enc == 1:
+        st.write("Kitchen: equipped")
+    else:
+        st.write("Kitchen: not equipped")
+    st.write("primary energy consumption : ", primary_energy_consumption, " kWh/m²")
+    if double_glazing_enc == 1:
+        st.write("Double glazing: present")
+    else:
+        st.write("Double glazing: not present")
+    st.write("State of the building: ", state_building)
+    
+    st.write("Your predicted price: €", round(price, 0))
         
 
     
