@@ -1,8 +1,10 @@
 import streamlit as st
 
+def calculate_price(zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc)
+
 st.title('🧱House price prediction🧱')
 
-st.info('This is a machine learning app')
+st.info('This is app to calculate the price of a house using a machine learning model')
 
 st.write('You want to know the value of a house?')
 zip_code = st.text_input("What is the zip code?")
@@ -31,11 +33,10 @@ if double_glazing ==  'No':
 state_building = st.selectbox("What is the state of the building?", ('To restore', 'To renovate', 'To be done up', 'Good', 'Just renovated', 'As new'), index=None, placeholder="Select state of the building")
 state_encoded = {'To restore': 0, 'To renovate': 1, 'To be done up': 2, 'Good': 3, 'Just renovated': 4, 'As new': 5}
 state_building_enc = state_encoded[state_building]
-st.write("You selected:", state_building_enc)
 
-type_house = st.selectbox("Is it a house or an apartement?", ['House', 'Apartment'])
 
+type_house = st.selectbox("Is it a house or an apartement?", ['House', 'Apartment'], index=None, placeholder="Select house or apartment")
 if type_house == 'House':
-    type_house = 1
+    type_house_enc = 1
 if type_house == 'Apartment':
-    type_house = 0
+    type_house_enc = 0
