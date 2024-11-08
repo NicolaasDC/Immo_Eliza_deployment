@@ -34,13 +34,13 @@ st.info('This is an app to calculate the price of a house using a machine learni
 
 st.write('You want to know the value of a house?')
 try:
-    zip_code = int(st.text_input("What is the zip code?"), value=0)
+    zip_code = int(st.text_input("What is the zip code?", value=0))
 
-    construction_year = int(st.text_input("What is the construction year?"), value=0)
+    construction_year = int(st.text_input("What is the construction year?", value=0))
 
-    number_rooms = int(st.text_input("What is the number of rooms?"), value=0)
+    number_rooms = int(st.text_input("What is the number of rooms?", value=0))
 
-    living_area = float(st.text_input("What is the living area? (m²)"), value=0)
+    living_area = float(st.text_input("What is the living area? (m²)", value=0))
 
     kitchen = st.selectbox("Is a kitchen equipped?", ("Yes", "No"), index=None,
         placeholder="Select kitchen")
@@ -49,7 +49,7 @@ try:
     else:
         kitchen_enc = 0
 
-    primary_energy_consumption = float(st.text_input("What is the primary energy consumption? (kWh/m²)"), value=0)
+    primary_energy_consumption = float(st.text_input("What is the primary energy consumption? (kWh/m²)", value=0))
 
     double_glazing = st.selectbox("Does the house have double glazing?",('Yes', 'No'), index=None, placeholder="Select double glazing")
     if double_glazing ==  'Yes':
