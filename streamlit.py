@@ -34,19 +34,19 @@ st.info('This is an app to calculate the price of a house using a machine learni
 
 st.write('You want to know the value of a house?')
 try:
-    zip_code = int(st.text_input("What is the zip code?"))
+    zip_code = int(st.text_input("What is the zip code?", value=0))
 except ValueError as ve:
     st.error(f"Please enter a valid numeric value: {ve}")
 try:
-    construction_year = int(st.text_input("What is the construction year?"))
+    construction_year = int(st.text_input("What is the construction year?"value=0))
 except ValueError as ve:
     st.error(f"Please enter a valid numeric value: {ve}")
 try:
-    number_rooms = int(st.text_input("What is the number of rooms?"))
+    number_rooms = int(st.text_input("What is the number of rooms?"value=0))
 except ValueError as ve:
     st.error(f"Please enter a valid numeric value: {ve}")
 try:
-    living_area = float(st.text_input("What is the living area? (m²)"))
+    living_area = float(st.text_input("What is the living area? (m²)"value=0))
 except ValueError as ve:
     st.error(f"Please enter a valid numeric value: {ve}")
     
@@ -56,9 +56,11 @@ if kitchen ==  'Yes':
     kitchen_enc = 1
 else:
     kitchen_enc = 0
-
-primary_energy_consumption = float(st.text_input("What is the primary energy consumption? (kWh/m²)", value=0))
-
+try:
+    primary_energy_consumption = float(st.text_input("What is the primary energy consumption? (kWh/m²)", value=0))
+except ValueError as ve:
+    st.error(f"Please enter a valid numeric value: {ve}")
+    
 double_glazing = st.selectbox("Does the house have double glazing?",('Yes', 'No'), index=None, placeholder="Select double glazing")
 if double_glazing ==  'Yes':
     double_glazing_enc = 1
