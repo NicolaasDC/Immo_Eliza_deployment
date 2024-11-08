@@ -30,7 +30,7 @@ def calculate_price(zip_code, construction_year, number_rooms, living_area, kitc
 
 st.title('🧱House price prediction🧱')
 
-st.info('This is app to calculate the price of a house using a machine learning model')
+st.info('This is an app to calculate the price of a house using a machine learning model')
 
 st.write('You want to know the value of a house?')
 zip_code = st.text_input("What is the zip code?")
@@ -68,7 +68,7 @@ if type_house == 'Apartment':
     type_house_enc = 0
     
  # Place the button in the Streamlit app
-if st.button("Click Me"):
+if st.button("Click to calculate price"):
     # Call the function when the button is clicked
     price = calculate_price(zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc)   
-    st.write("Your predicted price:", price)
+    st.write("Your predicted price: €", price)
