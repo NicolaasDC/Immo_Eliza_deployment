@@ -1,6 +1,32 @@
 import streamlit as st
+import numpy as np
+from xgboost import XGBRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_absolute_error
+from sklearn.preprocessing import StandardScaler
+import xgboost as xgb
+import joblib
 
-def calculate_price(zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc)
+
+# Define the function to run when the button is clicked
+def calculate_price(zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc):
+    # Create a new XGBRegressor
+    model = XGBRegressor()
+
+    # load a saved XGBRegressor model
+    model.load_model("./model/model_xgb.json")
+
+    # load the saved scaler, to apply the same scaler
+    scaler = joblib.load("./model/scaler.joblib")
+
+    # create a new house and scale it
+    new_house = np.array([zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc]).reshape(1, -1)  #['Postal code', 'Construction year', 'Number of rooms', 'Living area','kitchen', 'Primary energy consumption', 'Double glazing','State_encoded', 'Type of property_house']
+    new_data_scaled = scaler.transform(new_house)
+
+
+    # predict the price of the new house
+    predicted_price = model.predict(new_data_scaled)
+    return predicted_price[0]
 
 st.title('🧱House price prediction🧱')
 
@@ -40,3 +66,9 @@ if type_house == 'House':
     type_house_enc = 1
 if type_house == 'Apartment':
     type_house_enc = 0
+    
+ # Place the button in the Streamlit app
+if st.button("Click Me"):
+    # Call the function when the button is clicked
+    price = calculate_price(zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc)   
+    st.write("Your predicted price:", price)
