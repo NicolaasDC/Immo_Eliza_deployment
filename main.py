@@ -34,6 +34,10 @@ class HouseData(BaseModel):
     state_encoded: int
     type_of_property_house: int
 
+@app.get("/")
+async def root():
+    return {"Server": "Alive"}
+
 # Define predict function
 @app.post('/predict')
 def predict(data: HouseData):
@@ -56,7 +60,7 @@ def predict(data: HouseData):
     # Predict the price
     predicted_price = model.predict(new_data_scaled)
 
-    return {'prediction': float(predicted_price[0])}
+    return {'prediction': round(float(predicted_price[0]),0)}
 
 # Run the app
 if __name__ == '__main__':
