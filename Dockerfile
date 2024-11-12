@@ -1,18 +1,20 @@
-# Start with a base image with Python
-FROM python:3.13
+# Use the official Python image as the base image
+FROM python:3.9-slim
 
-# Set a working directory
-WORKDIR /main
+# Set the working directory in the container
+WORKDIR /app
 
-# Copy requirements and install dependencies
+# Copy the requirements.txt to the working directory
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the application code
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt && echo "Requirements installed successfully."
+
+# Copy the rest of the application code into the container
 COPY . .
 
-# Expose the port your API listens on (adjust if necessary)
+# Expose the port FastAPI will run on
 EXPOSE 8000
 
-# Define the command to run your API
-CMD ["python", "main.py"]  
+# Command to run the FastAPI app
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001"]
