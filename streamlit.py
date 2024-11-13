@@ -6,6 +6,7 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.preprocessing import StandardScaler
 import xgboost as xgb
 import joblib
+import requests
 
 
 # Define the function to run when the button is clicked
@@ -81,7 +82,22 @@ state_building_enc = state_encoded.get(state_building, 0)
 if st.button("Click to calculate price"):
 # Call the function when the button is clicked
     try:
-        price = calculate_price(zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc)
+        url = "https://immo-eliza-deployment-2ak3.onrender.com//predict"
+        data = {
+            "postal_code": zip_code,
+            "construction_year": construction_year,
+            "number_of_rooms": number_rooms,
+            "living_area": living_area,
+            "kitchen": kitchen_enc,
+            "primary_energy_consumption": primary_energy_consumption,
+            "double_glazing": double_glazing,
+            "state_encoded": state_encoded,
+            "type_of_property_house": type_house
+        }
+
+        response = requests.post(url, json=data)
+        price = (response.json()['prediction'])
+        #price = calculate_price(zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc)
         if type_house_enc == 1:
             st.info("House with the parameters:")
             st.write("Type: house")
