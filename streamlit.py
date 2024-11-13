@@ -84,15 +84,15 @@ if st.button("Click to calculate price"):
     try:
         url = "https://immo-eliza-deployment-2ak3.onrender.com//predict"
         data = {
-            "postal_code": zip_code,
-            "construction_year": construction_year,
-            "number_of_rooms": number_rooms,
-            "living_area": living_area,
-            "kitchen": kitchen_enc,
-            "primary_energy_consumption": primary_energy_consumption,
-            "double_glazing": double_glazing,
-            "state_encoded": state_encoded,
-            "type_of_property_house": type_house
+            "postal_code": int(zip_code),
+            "construction_year": int(construction_year),
+            "number_of_rooms": int(number_rooms),
+            "living_area": float(living_area),
+            "kitchen": int(kitchen_enc),
+            "primary_energy_consumption": float(primary_energy_consumption),
+            "double_glazing": int(double_glazing),
+            "state_encoded": int(state_encoded),
+            "type_of_property_house": int(type_house)
         }
 
         response = requests.post(url, json=data)
