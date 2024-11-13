@@ -94,14 +94,14 @@ if st.button("Click to calculate price"):
                 st.info("Apartment with the parameters:")
                 st.write("Type: apartment")
             st.write(f"Zip code: {zip_code}")
-            st.write(f"construction year: {construction_year}")
+            st.write(f"Construction year: {construction_year}")
             st.write(f"Number of rooms: {number_rooms}")
-            st.write(f"living area: {living_area} m²")
+            st.write(f"Living area: {living_area} m²")
             if kitchen_enc == 1:
                 st.write("Kitchen: equipped")
             else:
                 st.write("Kitchen: not equipped")
-            st.write(f"primary energy consumption: {primary_energy_consumption} kWh/m²")
+            st.write(f"Primary energy consumption: {primary_energy_consumption} kWh/m²")
             if double_glazing_enc == 1:
                 st.write("Double glazing: present")
             else:
