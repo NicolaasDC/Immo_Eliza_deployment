@@ -66,15 +66,15 @@ if st.button("Click to calculate price"):
     try:
         url = "https://immo-eliza-deployment-2ak3.onrender.com//predict"
         data = {
-            "postal_code": int(zip_code),
-            "construction_year": int(construction_year),
-            "number_of_rooms": int(number_rooms),
-            "living_area": float(living_area),
-            "kitchen": int(kitchen_enc),
-            "primary_energy_consumption": float(primary_energy_consumption),
-            "double_glazing": int(double_glazing_enc),
-            "state_encoded": int(state_building_enc),
-            "type_of_property_house": int(type_house_enc)
+            "postal_code": zip_code,
+            "construction_year": construction_year,
+            "number_of_rooms": number_rooms,
+            "living_area": living_area,
+            "kitchen": kitchen_enc,
+            "primary_energy_consumption": primary_energy_consumption,
+            "double_glazing": double_glazing_enc,
+            "state_encoded": state_building_enc,
+            "type_of_property_house": type_house_enc
         }
 
         response = requests.post(url, json=data)
@@ -89,20 +89,20 @@ if st.button("Click to calculate price"):
         else:
             st.info("Apartment with the parameters:")
             st.write("Type: apartment")
-        st.write("Zip code: ", zip_code)
-        st.write("construction year: ", construction_year)
-        st.write("Number of rooms: ", number_rooms)
-        st.write("living_area: ", living_area, " m²")
+        st.write(f"Zip code: {zip_code}")
+        st.write(f"construction year: {construction_year}")
+        st.write(f"Number of rooms: {number_rooms}")
+        st.write(f"living_area: {living_area} m²")
         if kitchen_enc == 1:
             st.write("Kitchen: equipped")
         else:
             st.write("Kitchen: not equipped")
-        st.write("primary energy consumption : ", primary_energy_consumption, " kWh/m²")
+        st.write(f"primary energy consumption: {primary_energy_consumption} kWh/m²")
         if double_glazing_enc == 1:
             st.write("Double glazing: present")
         else:
             st.write("Double glazing: not present")
-        st.write("State of the building: ", state_building)
+        st.write(f"State of the building: {state_building}")
         
         st.info(f"Your predicted price: € {price}")
 
