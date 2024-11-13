@@ -82,7 +82,6 @@ if st.button("Click to calculate price"):
             st.error("API request failed. Status code: " + str(response.status_code))
         else:
             price = response.json().get('prediction', 'Prediction not available')
-            st.write("Your predicted price: €", price)
         
         if type_house_enc == 1:
             st.info("House with the parameters:")
@@ -105,7 +104,7 @@ if st.button("Click to calculate price"):
             st.write("Double glazing: not present")
         st.write("State of the building: ", state_building)
         
-        st.write("Your predicted price: €", price)
+        st.info("Your predicted price: €", price)
     except ValueError as ve:
         st.error(f"Please enter valid values")     
 
