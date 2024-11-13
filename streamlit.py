@@ -9,25 +9,6 @@ import joblib
 import requests
 
 
-# Define the function to run when the button is clicked
-def calculate_price(zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc):
-    # Create a new XGBRegressor
-    model = XGBRegressor()
-
-    # load a saved XGBRegressor model
-    model.load_model("./model/model_xgb.json")
-
-    # load the saved scaler, to apply the same scaler
-    scaler = joblib.load("./model/scaler.joblib")
-
-    # create a new house and scale it
-    new_house = np.array([zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc]).reshape(1, -1)  #['Postal code', 'Construction year', 'Number of rooms', 'Living area','kitchen', 'Primary energy consumption', 'Double glazing','State_encoded', 'Type of property_house']
-    new_data_scaled = scaler.transform(new_house)
-
-    # predict the price of the new house
-    predicted_price = model.predict(new_data_scaled)
-    return predicted_price[0]
-
 st.title('🧱House price prediction🧱')
 
 st.info('This is an app to calculate the price of a house or apartment using a machine learning model')
@@ -81,25 +62,7 @@ state_building_enc = state_encoded.get(state_building, 0)
 # Place the button in the Streamlit app
 if st.button("Click to calculate price"):
 # Call the function when the button is clicked
-    url = "https://immo-eliza-deployment-2ak3.onrender.com//predict"
-    data = {
-        "postal_code": int(zip_code),
-        "construction_year": int(construction_year),
-        "number_of_rooms": int(number_rooms),
-        "living_area": float(living_area),
-        "kitchen": int(kitchen_enc),
-        "primary_energy_consumption": float(primary_energy_consumption),
-        "double_glazing": int(double_glazing),
-        "state_encoded": int(state_encoded),
-        "type_of_property_house": int(type_house)
-    }
 
-    response = requests.post(url, json=data)
-    if response.status_code != 200:
-        st.error("API request failed. Status code: " + str(response.status_code))
-    else:
-        price = response.json().get('prediction', 'Prediction not available')
-        st.write("Your predicted price: €", price)
     try:
         url = "https://immo-eliza-deployment-2ak3.onrender.com//predict"
         data = {
@@ -109,9 +72,9 @@ if st.button("Click to calculate price"):
             "living_area": float(living_area),
             "kitchen": int(kitchen_enc),
             "primary_energy_consumption": float(primary_energy_consumption),
-            "double_glazing": int(double_glazing),
-            "state_encoded": int(state_encoded),
-            "type_of_property_house": int(type_house)
+            "double_glazing": int(double_glazing_enc),
+            "state_encoded": int(state_building_enc),
+            "type_of_property_house": int(type_house_enc)
         }
 
         response = requests.post(url, json=data)
@@ -120,7 +83,7 @@ if st.button("Click to calculate price"):
         else:
             price = response.json().get('prediction', 'Prediction not available')
             st.write("Your predicted price: €", price)
-        #price = calculate_price(zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc)
+        
         if type_house_enc == 1:
             st.info("House with the parameters:")
             st.write("Type: house")
