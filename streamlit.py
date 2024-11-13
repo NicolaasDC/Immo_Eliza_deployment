@@ -100,7 +100,7 @@ if st.button("Click to calculate price"):
             st.error("API request failed. Status code: " + str(response.status_code))
         else:
             price = response.json().get('prediction', 'Prediction not available')
-        
+            st.write("Your predicted price: €", price)
         #price = calculate_price(zip_code, construction_year, number_rooms, living_area, kitchen_enc, primary_energy_consumption, double_glazing_enc, state_building_enc, type_house_enc)
         if type_house_enc == 1:
             st.info("House with the parameters:")
