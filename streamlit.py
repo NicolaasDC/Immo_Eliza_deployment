@@ -96,7 +96,7 @@ if st.button("Click to calculate price"):
             st.write(f"Zip code: {zip_code}")
             st.write(f"construction year: {construction_year}")
             st.write(f"Number of rooms: {number_rooms}")
-            st.write(f"living_area: {living_area} m²")
+            st.write(f"living area: {living_area} m²")
             if kitchen_enc == 1:
                 st.write("Kitchen: equipped")
             else:
