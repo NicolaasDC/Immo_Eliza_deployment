@@ -104,8 +104,8 @@ if st.button("Click to calculate price"):
             st.write("Double glazing: not present")
         st.write("State of the building: ", state_building)
         
-        st.write("Your predicted price: €", price)
-        st.info(price)
+        st.info(f"Your predicted price: € {price}")
+
     except ValueError as ve:
         st.error(f"Please enter valid values")     
 
