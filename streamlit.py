@@ -22,10 +22,8 @@ else:
     type_house_enc = 0
 try:
     zip_code = int(st.text_input("What is the zip code?", value=0))
-    try:
-        zip_code >= 1000 and zip_code <= 9992
-    except:
-        st.write('Please enter a valid numeric value between 1000 and 9992')
+    if not (1000 <= zip_code <= 9992):
+        st.error("Please enter a numeric value between 1000 and 9992")
 except ValueError as ve:
     st.error(f"Please enter a valid numeric value between 1000 and 9992")
 try:
