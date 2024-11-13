@@ -11,7 +11,7 @@ import requests
 
 st.title('🧱House price prediction🧱')
 
-st.info('This is an app to calculate the price of a house or apartment using a machine learning model')
+st.info('This is an app to calculate the price of a house or apartment in Belgium using a machine learning model')
 
 st.write('You want to know the value of a house?')
 
@@ -64,51 +64,53 @@ state_building_enc = state_encoded.get(state_building, 0)
 # Place the button in the Streamlit app
 if st.button("Click to calculate price"):
 # Call the function when the button is clicked
+    if zip_code == 0 or construction_year == 0 or number_rooms == 0 or living_area == 0 or primary_energy_consumption == 0:
+        st.error("Please fill in all required fields (numeric fields must be non-zero).")
+    else:
+        try:
+            url = "https://immo-eliza-deployment-2ak3.onrender.com/predict"
+            data = {
+                "postal_code": zip_code,
+                "construction_year": construction_year,
+                "number_of_rooms": number_rooms,
+                "living_area": living_area,
+                "kitchen": kitchen_enc,
+                "primary_energy_consumption": primary_energy_consumption,
+                "double_glazing": double_glazing_enc,
+                "state_encoded": state_building_enc,
+                "type_of_property_house": type_house_enc
+            }
 
-    try:
-        url = "https://immo-eliza-deployment-2ak3.onrender.com//predict"
-        data = {
-            "postal_code": zip_code,
-            "construction_year": construction_year,
-            "number_of_rooms": number_rooms,
-            "living_area": living_area,
-            "kitchen": kitchen_enc,
-            "primary_energy_consumption": primary_energy_consumption,
-            "double_glazing": double_glazing_enc,
-            "state_encoded": state_building_enc,
-            "type_of_property_house": type_house_enc
-        }
+            response = requests.post(url, json=data)
+            if response.status_code != 200:
+                st.error("API request failed. Status code: " + str(response.status_code))
+            else:
+                price = response.json().get('prediction', 'Prediction not available')
+            
+            if type_house_enc == 1:
+                st.info("House with the parameters:")
+                st.write("Type: house")
+            else:
+                st.info("Apartment with the parameters:")
+                st.write("Type: apartment")
+            st.write(f"Zip code: {zip_code}")
+            st.write(f"construction year: {construction_year}")
+            st.write(f"Number of rooms: {number_rooms}")
+            st.write(f"living_area: {living_area} m²")
+            if kitchen_enc == 1:
+                st.write("Kitchen: equipped")
+            else:
+                st.write("Kitchen: not equipped")
+            st.write(f"primary energy consumption: {primary_energy_consumption} kWh/m²")
+            if double_glazing_enc == 1:
+                st.write("Double glazing: present")
+            else:
+                st.write("Double glazing: not present")
+            st.write(f"State of the building: {state_building}")
+            
+            st.info(f"Your predicted price: € {price}")
 
-        response = requests.post(url, json=data)
-        if response.status_code != 200:
-            st.error("API request failed. Status code: " + str(response.status_code))
-        else:
-            price = response.json().get('prediction', 'Prediction not available')
-        
-        if type_house_enc == 1:
-            st.info("House with the parameters:")
-            st.write("Type: house")
-        else:
-            st.info("Apartment with the parameters:")
-            st.write("Type: apartment")
-        st.write(f"Zip code: {zip_code}")
-        st.write(f"construction year: {construction_year}")
-        st.write(f"Number of rooms: {number_rooms}")
-        st.write(f"living_area: {living_area} m²")
-        if kitchen_enc == 1:
-            st.write("Kitchen: equipped")
-        else:
-            st.write("Kitchen: not equipped")
-        st.write(f"primary energy consumption: {primary_energy_consumption} kWh/m²")
-        if double_glazing_enc == 1:
-            st.write("Double glazing: present")
-        else:
-            st.write("Double glazing: not present")
-        st.write(f"State of the building: {state_building}")
-        
-        st.info(f"Your predicted price: € {price}")
-
-    except ValueError as ve:
-        st.error(f"Please enter valid values")     
+        except Exception as e:
+            st.error(f"An error occurred: {str(e)}")
 
     
