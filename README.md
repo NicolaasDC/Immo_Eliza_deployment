@@ -1,7 +1,7 @@
 # Immo_Eliza_deployment
 
 
-# Description
+## 🏢 Description
 
 The real estate company Immo Eliza asked you to create a machine learning model to predict prices of real estate properties in Belgium. 
 This document describes the final stage of the project: model deployment.
@@ -12,13 +12,13 @@ This project follows previous stages in the [immo-eliza-scraping](https://github
 
 
 
-# Objectives
+## 🚀 Objectives
 ```
 - Deploy a machine learning model via an API endpoint.
 - Host the API on Render. 
 - Build a simple web application using Streamlit.
 ```
-# Repo structure
+## 📦 Repo structure
 ```
 .
 ├── .gitignore
@@ -32,7 +32,7 @@ This project follows previous stages in the [immo-eliza-scraping](https://github
 └── README.md
 ```
 
-# Usage
+## 🤖 Usage
 
 The Streamlit page is hosted here: https://immoelizadeployment.streamlit.app/.
 
@@ -43,11 +43,11 @@ Once the button is clicked, the API responds with the predicted price, and a sum
 The API is defined in main.py and hosted on Render using a Dockerfile. 
 The link to the API is: https://immo-eliza-deployment-2ak3.onrender.com
 
-# Timeline
+## ⏱️ Timeline
 
 This project took four days to complete, which included studying the subject matter.
 
-# Addition info
+## 📚 Additional info
 
 This project was done as part of the AI Bootcamp at BeCode.org.
 
