@@ -6,9 +6,10 @@
 The real estate company Immo Eliza asked you to create a machine learning model to predict prices of real estate properties in Belgium. 
 This document describes the final stage of the project: model deployment.
 
-This project follows previous stages in the immo-eliza-scraping (https://github.com/NicolaasDC/immo-eliza-scraping), 
-immo-eliza-data-analysis project (https://github.com/VB1395/immoeliza_data_analysis) and 
-immo_eliza_ML (https://github.com/NicolaasDC/Immo_Eliza_ML) repositories.
+This project follows previous stages in the [immo-eliza-scraping](https://github.com/NicolaasDC/immo-eliza-scraping), 
+[immo-eliza-data-analysis](https://github.com/VB1395/immoeliza_data_analysis) and 
+[immo-eliza-ML](https://github.com/NicolaasDC/Immo_Eliza_ML) repositories.
+
 
 
 # Objectives
