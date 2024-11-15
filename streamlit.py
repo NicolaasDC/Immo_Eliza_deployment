@@ -21,7 +21,7 @@ if type_house == 'House':
 else:
     type_house_enc = 0
 try:
-    zip_code = int(st.text_input("What is the zip code?", value=0))
+    zip_code = int(st.text_input("What is the zip code?", value=1000))
     if not (1000 <= zip_code <= 9992):
         st.error("Please enter a numeric value between 1000 and 9992!")
 except ValueError as ve:
