@@ -6,9 +6,7 @@ from xgboost import XGBRegressor
 from sklearn.preprocessing import StandardScaler
 import joblib
 
-
 # Create the app
-
 app = FastAPI()
 
 # Create a new XGBRegressor
@@ -16,7 +14,6 @@ model = XGBRegressor()
 
 # Load trained Pipeline
 model.load_model("./model/model_xgb.json")
-
 
 # Load the saved scaler
 scaler = joblib.load("./model/scaler.joblib")

@@ -9,7 +9,7 @@ COPY requirements.txt .
 
 # Install dependencies
 RUN python -m pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt && echo "Requirements installed successfully."
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code into the container
 COPY . .
@@ -18,4 +18,4 @@ COPY . .
 EXPOSE 8000
 
 # Command to run the FastAPI app
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
