@@ -23,21 +23,21 @@ else:
 try:
     zip_code = int(st.text_input("What is the zip code?", value=0))
     if not (1000 <= zip_code <= 9992):
-        st.error("Please enter a numeric value between 1000 and 9992")
+        st.error("Please enter a numeric value between 1000 and 9992!")
 except ValueError as ve:
-    st.error(f"Please enter a valid numeric value between 1000 and 9992")
+    st.error(f"Please enter a valid numeric value between 1000 and 9992!")
 try:
     construction_year = int(st.text_input("What is the construction year?", value=0))
 except ValueError as ve:
-    st.error(f"Please enter a valid numeric value")
+    st.error(f"Please enter a valid numeric value!")
 try:
     number_rooms = int(st.text_input("What is the number of rooms?", value=0))
 except ValueError as ve:
-    st.error(f"Please enter a valid numeric value{ve}")
+    st.error(f"Please enter a valid numeric value!")
 try:
     living_area = float(st.text_input("What is the living area? (m²)", value=0))
 except ValueError as ve:
-    st.error(f"Please enter a valid numeric value: {ve}")
+    st.error(f"Please enter a valid numeric value!")
     
 kitchen = st.selectbox("Is a kitchen equipped?", ("Yes", "No"), index=None,
     placeholder="Select kitchen")
